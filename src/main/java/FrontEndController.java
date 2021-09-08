@@ -28,13 +28,9 @@ public class FrontEndController extends HttpServlet {
         RequestDispatcher view = null;
 
         if (path.equals("/hero")) {
-            view = request.getRequestDispatcher("hero.jsp");
+            view = request.getRequestDispatcher("admin/hero.jsp");
         }
 
-        if (path.equals("/admin")) {
-            view = request.getRequestDispatcher("admin.jsp");
-
-        }
 
         view.forward(request, response);
     }
@@ -45,6 +41,7 @@ public class FrontEndController extends HttpServlet {
             throws ServletException, IOException {
         String path = request.getServletPath();
         System.out.println(path);
+
 
         if (request.getServletPath().equals("/hero")) {
             RequestDispatcher view = request.getRequestDispatcher("admin.jsp");
