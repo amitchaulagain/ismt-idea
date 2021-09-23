@@ -9,6 +9,8 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
 <h1>All Users</h1>
@@ -22,6 +24,7 @@
          <th scope="col">Email</th>
          <th scope="col">Phone</th>
          <th scope="col">Is Active </th>
+         <th scope="col">Action </th>
        </tr>
      </thead>
      <tbody>
@@ -36,6 +39,13 @@
           <td>${user.email}</td>
           <td>${user.phone}</td>
           <td>${user.active}</td>
+          <td>
+          <a href="/viewUser?id=${user.id}">Details</a>
+          <a href="">Edit</a>
+          <a href="/deleteUser?id=${user.id}">Delete</a>
+
+
+          </td>
        </tr>
 
        </c:forEach>

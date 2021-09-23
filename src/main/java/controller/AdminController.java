@@ -17,9 +17,11 @@ import java.util.List;
  * This servlet program is used to print "Hello World" on
  * client browser using annotations.
  */
-@WebServlet(urlPatterns = {"/admin", "/users"})
+@WebServlet(urlPatterns = {"/admin", "/users", "/createUser", "/viewUser","/deleteUser"})
 public class AdminController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    UserDAO userDAO = new UserDAO();
+
 
     //no-argument constructor
     public AdminController() {
@@ -37,19 +39,46 @@ public class AdminController extends HttpServlet {
         if (path.equals("/admin")) {
 
             view = request.getRequestDispatcher("admin/success.jsp");
+            view.forward(request, response);
+
+        }
+        if (path.equals("/createUser")) {
+
+
+            view = request.getRequestDispatcher("admin/create-user.jsp");
+            view.forward(request, response);
+
+        }
+        if (path.equals("/viewUser")) {
+
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            User user = userDAO.findById(id);
+            request.setAttribute("ourUser", user);
+            view = request.getRequestDispatcher("admin/view-user.jsp");
+            view.forward(request, response);
+
+        }
+        if (path.equals("/deleteUser")) {
+
+
+            int id = Integer.parseInt(request.getParameter("id"));
+             userDAO.delete(id);
+
+            response.sendRedirect("/users");
 
         }
 
         if (path.equals("/users")) {
 
-            UserDAO userDAO = new UserDAO();
             List<User> users = userDAO.findAll();
             request.setAttribute("usersList", users);
             view = request.getRequestDispatcher("admin/users.jsp");
+            view.forward(request, response);
 
         }
 
-        view.forward(request, response);
+
     }
 
 //    private List<User> runthis() {
@@ -96,8 +125,47 @@ public class AdminController extends HttpServlet {
         String path = request.getServletPath();
         System.out.println(path);
 
-        if (request.getServletPath().equals("/hero")) {
-            RequestDispatcher view = request.getRequestDispatcher("admin.jsp");
+        if (request.getServletPath().equals("/createUser")) {
+
+
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+
+            String phone = request.getParameter("phone");
+
+            String username = request.getParameter("username");
+
+            String password = request.getParameter("password");
+
+
+            User user = new User(name, email, phone, username, password, true);
+
+
+            userDAO.create(user);
+
+
+            System.out.println("I am here");
+
+
+            RequestDispatcher view = request.getRequestDispatcher("admin/success.jsp");
+            view.forward(request, response);
+
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request,
+                            HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getServletPath();
+        System.out.println(path);
+
+        if (request.getServletPath().equals("/createUser")) {
+
+            System.out.println("I am here");
+
+
+            RequestDispatcher view = request.getRequestDispatcher("success.jsp");
             view.forward(request, response);
 
         }
