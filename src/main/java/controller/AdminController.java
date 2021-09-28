@@ -17,6 +17,15 @@ import java.util.List;
  * This servlet program is used to print "Hello World" on
  * client browser using annotations.
  */
+//TODO :  email too long  --resolved
+//TODO :  edit user    --resolved
+
+
+
+
+
+
+
 @WebServlet(urlPatterns = {"/admin", "/users", "/createUser", "/viewUser", "/deleteUser", "/editUser"})
 public class AdminController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -202,3 +211,4 @@ public class AdminController extends HttpServlet {
         }
     }
 }
+

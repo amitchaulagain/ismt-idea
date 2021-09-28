@@ -45,13 +45,16 @@
    Is Active ?
   <div class="form-check">
 
-    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault1" checked="{user.active}"  >
+
+    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault1" value="true" ${user.active eq true ? 'checked=\"checked\"' :''} >
+
+
     <label class="form-check-label" for="flexRadioDefault1">
       Yes
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault2"  checked="!{user.active}" >
+     <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault1" value="false" ${user.active eq false ? 'checked=\"checked\"' :''} >
     <label class="form-check-label" for="flexRadioDefault2">
       No
     </label>
