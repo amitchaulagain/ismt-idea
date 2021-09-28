@@ -17,7 +17,7 @@ import java.util.List;
  * This servlet program is used to print "Hello World" on
  * client browser using annotations.
  */
-@WebServlet(urlPatterns = {"/admin", "/users", "/createUser", "/viewUser","/deleteUser"})
+@WebServlet(urlPatterns = {"/admin", "/users", "/createUser", "/viewUser", "/deleteUser", "/editUser"})
 public class AdminController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     UserDAO userDAO = new UserDAO();
@@ -49,6 +49,17 @@ public class AdminController extends HttpServlet {
             view.forward(request, response);
 
         }
+
+        if (path.equals("/editUser")) {
+            String id = request.getParameter("id");
+
+            User user=userDAO.findById(Integer.parseInt(id));
+
+            request.setAttribute("user",user );
+            view = request.getRequestDispatcher("admin/edit-user.jsp");
+            view.forward(request, response);
+
+        }
         if (path.equals("/viewUser")) {
 
 
@@ -63,9 +74,10 @@ public class AdminController extends HttpServlet {
 
 
             int id = Integer.parseInt(request.getParameter("id"));
-             userDAO.delete(id);
+            userDAO.delete(id);
 
             response.sendRedirect("/users");
+
 
         }
 
@@ -138,7 +150,10 @@ public class AdminController extends HttpServlet {
             String password = request.getParameter("password");
 
 
-            User user = new User(name, email, phone, username, password, true);
+            boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+
+
+            User user = new User(name, email, phone, username, password, isActive);
 
 
             userDAO.create(user);
@@ -147,8 +162,7 @@ public class AdminController extends HttpServlet {
             System.out.println("I am here");
 
 
-            RequestDispatcher view = request.getRequestDispatcher("admin/success.jsp");
-            view.forward(request, response);
+            response.sendRedirect("/users");
 
         }
     }
@@ -163,6 +177,23 @@ public class AdminController extends HttpServlet {
         if (request.getServletPath().equals("/createUser")) {
 
             System.out.println("I am here");
+
+
+            RequestDispatcher view = request.getRequestDispatcher("success.jsp");
+            view.forward(request, response);
+
+        }
+    }
+
+
+    @Override
+    protected void doPut(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getServletPath();
+        System.out.println(path);
+
+        if (request.getServletPath().equals("/editUser")) {
 
 
             RequestDispatcher view = request.getRequestDispatcher("success.jsp");

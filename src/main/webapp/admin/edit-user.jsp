@@ -15,38 +15,43 @@
 
 <body>
 <div class="container" >
-<form action="/createUser" method="post">
+<form action="/editUser" method="put">
+
+<div class="mb-3">
+      <label for="id" class="form-label">ID</label>
+      <input type="text" class="form-control" id="name" name="id" value="${user.id}">
+    </div>
    <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" name="name">
+      <input type="text" class="form-control" id="name" name="name" value="${user.name}">
     </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="${user.email}">
   </div>
 
   <div class="mb-3">
         <label for="phone" class="form-label">Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone">
+        <input type="text" class="form-control" id="phone" name="phone" value="${user.phone}">
       </div>
    <div class="mb-3">
       <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" name="username">
+      <input type="text" class="form-control" id="username" name="username" value="${user.username}">
     </div>
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" name="password">
+    <input type="password" class="form-control" id="password" name="password" value="${user.password}">
   </div>
    Is Active ?
   <div class="form-check">
 
-    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault1" value="true" >
+    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault1" checked="{user.active}"  >
     <label class="form-check-label" for="flexRadioDefault1">
       Yes
     </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault2" checked value="false" >
+    <input class="form-check-input" type="radio" name="isActive" id="flexRadioDefault2"  checked="!{user.active}" >
     <label class="form-check-label" for="flexRadioDefault2">
       No
     </label>

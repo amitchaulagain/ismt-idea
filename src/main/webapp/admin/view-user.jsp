@@ -15,6 +15,9 @@
 
 <body>
 <div class="container" >
+
+<h1>User Detail View</h1>
+
 <div class="alert alert-success" role="alert">
   ID : ${ourUser.id}
 </div>

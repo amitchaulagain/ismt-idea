@@ -14,6 +14,10 @@
 </head>
 <body>
 <h1>All Users</h1>
+<div style="float:right; margin-right:260px">
+<a href="/createUser" >Create </a>
+</div>
+
    <table class="table">
      <thead>
        <tr>
@@ -41,7 +45,7 @@
           <td>${user.active}</td>
           <td>
           <a href="/viewUser?id=${user.id}">Details</a>
-          <a href="">Edit</a>
+          <a href="/editUser?id=${user.id}">Edit</a>
           <a href="/deleteUser?id=${user.id}">Delete</a>
 
 
