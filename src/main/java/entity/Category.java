@@ -1,11 +1,15 @@
 package entity;
 
-public class Product {
+public class Category {
     private int id;
     private String name;
-    private Double price;
     private String description;
-    private int categoryId;
+
+    public Category(int id, String name, String description) {
+        this.id=id;
+        this.name=name;
+        this.description=description;
+    }
 
     public int getId() {
         return id;
@@ -23,27 +27,11 @@ public class Product {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 }
