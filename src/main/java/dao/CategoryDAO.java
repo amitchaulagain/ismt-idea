@@ -2,7 +2,6 @@ package dao;
 
 import config.JDBCUtils;
 import entity.Category;
-import entity.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,7 +66,7 @@ public class CategoryDAO {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
 
-                category=new Category(id,name,description);
+                category = new Category(id, name, description);
 
             }
         } catch (SQLException e) {
@@ -144,11 +143,6 @@ public class CategoryDAO {
             preparedStatement.setString(2, category.getName());
             preparedStatement.setString(3, category.getDescription());
             preparedStatement.setInt(4, id);
-
-
-
-
-
 
 
             // Step 3: Execute the query or update query

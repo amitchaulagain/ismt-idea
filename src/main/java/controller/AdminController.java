@@ -1,7 +1,9 @@
 package controller;
 
 
+import dao.CategoryDAO;
 import dao.UserDAO;
+import entity.Category;
 import entity.User;
 
 import javax.servlet.RequestDispatcher;
@@ -26,10 +28,14 @@ import java.util.List;
 
 
 
-@WebServlet(urlPatterns = {"/admin", "/users", "/createUser", "/viewUser", "/deleteUser", "/editUser"})
+@WebServlet(urlPatterns = {"/admin", "/users", "/createUser", "/viewUser", "/deleteUser",
+        "/editUser","/categories", "/createCategory", "/viewCategory", "/deleteCategory",
+        "/editCategory"})
 public class AdminController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     UserDAO userDAO = new UserDAO();
+    CategoryDAO categoryDAO = new CategoryDAO();
+
 
 
     //no-argument constructor
@@ -47,7 +53,7 @@ public class AdminController extends HttpServlet {
 
         if (path.equals("/admin")) {
 
-            view = request.getRequestDispatcher("admin/success.jsp");
+            view = request.getRequestDispatcher("admin/admin.jsp");
             view.forward(request, response);
 
         }
@@ -89,6 +95,63 @@ public class AdminController extends HttpServlet {
 
 
         }
+        if (path.equals("/users")) {
+
+            List<User> users = userDAO.findAll();
+            request.setAttribute("usersList", users);
+            view = request.getRequestDispatcher("admin/users.jsp");
+            view.forward(request, response);
+
+        }
+
+        if (path.equals("/categories")) {
+
+            List<Category> categories = categoryDAO.findAll();
+            request.setAttribute("categories", categories);
+            view = request.getRequestDispatcher("admin/categories.jsp");
+            view.forward(request, response);
+
+        }
+
+
+        if (path.equals("/createCategory")) {
+
+
+            view = request.getRequestDispatcher("admin/create-user.jsp");
+            view.forward(request, response);
+
+        }
+
+        if (path.equals("/editCategory")) {
+            String id = request.getParameter("id");
+
+            User user=userDAO.findById(Integer.parseInt(id));
+
+            request.setAttribute("user",user );
+            view = request.getRequestDispatcher("admin/edit-user.jsp");
+            view.forward(request, response);
+
+        }
+        if (path.equals("/viewCategory")) {
+
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            User user = userDAO.findById(id);
+            request.setAttribute("ourUser", user);
+            view = request.getRequestDispatcher("admin/view-user.jsp");
+            view.forward(request, response);
+
+        }
+        if (path.equals("/deleteCategory")) {
+
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            userDAO.delete(id);
+
+            response.sendRedirect("/users");
+
+
+        }
 
         if (path.equals("/users")) {
 
@@ -102,41 +165,6 @@ public class AdminController extends HttpServlet {
 
     }
 
-//    private List<User> runthis() {
-//        List<User> students = new ArrayList<>();
-//        // using try-with-resources to avoid closing resources (boiler plate code)
-//
-//        // Step 1: Establishing a Connection
-//        try (Connection connection = JDBCUtils.getConnection();
-//
-//             // Step 2:Create a statement using connection object
-//             PreparedStatement preparedStatement = connection.prepareStatement("select * from student");) {
-//            // preparedStatement.setInt(1, 1);
-//            System.out.println(preparedStatement);
-//            // Step 3: Execute the query or update query
-//            ResultSet rs = preparedStatement.executeQuery();
-//
-//
-//            // Step 4: Process the ResultSet object.
-//            while (rs.next()) {
-//                int id = rs.getInt(1);
-//                String firstName = rs.getString(2);
-//                String lastName = rs.getString("last_name");
-//                String email = rs.getString("email");
-//                String phone = rs.getString("phone");
-//                User user = new User();
-//                user.setId(id);
-//                user.setEmail(email);
-//                user.setPhone(phone);
-//                students.add(user);
-//            }
-//
-//        } catch (SQLException e) {
-//            JDBCUtils.printSQLException(e);
-//        }
-//        return students;
-//        // Step 4: try-with-resource statement will auto close the connection.
-//    }
 
 
     @Override
