@@ -1,5 +1,8 @@
 package controller;
 
+import dao.UserDAO;
+import entity.User;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This servlet program is used to print "Hello World" on
@@ -14,6 +18,7 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = {"/hero", "/product", "/order"})
 public class FrontEndController extends HttpServlet {
+    UserDAO userDAO = new UserDAO();
     private static final long serialVersionUID = 1L;
 
     //no-argument constructor
@@ -30,7 +35,10 @@ public class FrontEndController extends HttpServlet {
         RequestDispatcher view = null;
 
         if (path.equals("/hero")) {
-            view = request.getRequestDispatcher("admin/hero.jsp");
+            List<User> users = userDAO.findAll();
+            request.setAttribute("usersList", users);
+            view = request.getRequestDispatcher("admin/users.jsp");
+            view.forward(request, response);
         }
 
 

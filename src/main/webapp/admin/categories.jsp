@@ -39,9 +39,9 @@
           <td>${cat.description}</td>
 
           <td>
-          <a href="/viewCategory?id=${user.id}">Details</a>
-          <a href="/editCategory?id=${user.id}">Edit</a>
-          <a href="/deleteCategory?id=${user.id}">Delete</a>
+          <a href="/viewCategory?id=${cat.id}">Details</a>
+          <a href="/editCategory?id=${cat.id}">Edit</a>
+          <a href="/deleteCategory?id=${cat.id}">Delete</a>
 
 
           </td>

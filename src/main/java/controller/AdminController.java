@@ -153,15 +153,14 @@ public class AdminController extends HttpServlet {
 
         }
 
-        if (path.equals("/users")) {
+       /* if (path.equals("/users")) {
 
             List<User> users = userDAO.findAll();
             request.setAttribute("usersList", users);
             view = request.getRequestDispatcher("admin/users.jsp");
             view.forward(request, response);
-            return;
 
-        }
+        }*/
 
 
     }
