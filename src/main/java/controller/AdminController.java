@@ -159,6 +159,7 @@ public class AdminController extends HttpServlet {
             request.setAttribute("usersList", users);
             view = request.getRequestDispatcher("admin/users.jsp");
             view.forward(request, response);
+            return;
 
         }
 
